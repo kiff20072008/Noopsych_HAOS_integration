@@ -1,10 +1,10 @@
 {
+  "domain": "noopsych_lamp",
+  "name": "Noopsych lamp",
   "codeowners": ["@kiff20072008"],
   "config_flow": true,
   "documentation": "https://github.com/kiff20072008/Noopsych_HAOS_integration",
-  "domain": "noopsych_lamp",
   "iot_class": "local_push",
   "issue_tracker": "https://github.com/kiff20072008/Noopsych_HAOS_integration/issues",
-  "name": "Noopsych lamp",
   "version": "1.0.0"
 }
