@@ -7,7 +7,7 @@ from homeassistant.core import HomeAssistant
 from .const import (
     DEFAULT_PORT,
     PAYLOAD_INIT,
-    PAYLOAD_MANUAL_MODE,
+    MANUAL_MODE_TEMPLATE,
     PAYLOAD_AUTO_MODE
 )
 
@@ -77,9 +77,20 @@ class SmartLampTcpApi:
                 s.close()
                 _LOGGER.debug("Socket closed.")
 
-    async def set_manual_mode(self):
-        """Switch the lamp to manual mode."""
-        payload = bytes.fromhex(PAYLOAD_MANUAL_MODE)
+    async def set_manual_channels(self, channel_values: list[int]):
+        """Build and send a command to set manual channel levels."""
+        if len(channel_values) != 6:
+            _LOGGER.error(f"Invalid channel values provided: {channel_values}")
+            return
+
+        # Преобразуем каждое значение (0-100) в HEX-строку из 2 символов (00-64)
+        # f'{v:02x}' -> 100 станет '64', а 5 станет '05'
+        channels_hex = "".join([f'{v:02x}' for v in channel_values])
+
+        # Подставляем HEX-строку в наш шаблон
+        payload_str = MANUAL_MODE_TEMPLATE.format(channels=channels_hex)
+
+        payload = bytes.fromhex(payload_str)
         await self._hass.async_add_executor_job(self._execute_full_session, payload)
 
     async def set_auto_mode(self):

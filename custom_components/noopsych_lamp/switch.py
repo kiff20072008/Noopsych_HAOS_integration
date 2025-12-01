@@ -7,6 +7,7 @@ from homeassistant.helpers.device_registry import DeviceInfo
 
 from .const import DOMAIN
 from .api import SmartLampTcpApi
+from .number import CHANNEL_STORAGE # Импортируем наше хранилище
 
 async def async_setup_entry(
     hass: HomeAssistant,
@@ -39,8 +40,10 @@ class SmartLampTCPSwitch(SwitchEntity):
         )
 
     async def async_turn_on(self, **kwargs) -> None:
-        """Turn the entity on (set to manual mode)."""
-        await self._api.set_manual_mode()
+        """Turn the entity on (set to manual mode with current slider values)."""
+        # Берем текущие значения из хранилища
+        current_channel_values = CHANNEL_STORAGE.get(self._entry.entry_id, [100] * 6)
+        await self._api.set_manual_channels(current_channel_values)
         self._attr_is_on = True
         self.async_write_ha_state()
 
