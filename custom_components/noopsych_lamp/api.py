@@ -29,6 +29,7 @@ class NoopsychLampApi:
         This mimics the exact behavior of the successful Scapy script.
         """
         _LOGGER.debug(f"Starting full session with {self._host}:{self._port}")
+        return
         s = None
         try:
             # Создаем сокет
