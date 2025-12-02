@@ -67,10 +67,10 @@ class NoopsychLampApi:
 
         except socket.timeout:
             _LOGGER.error(f"Timeout communicating with lamp at {self._host}")
-            raise ConnectionError("Timeout communicating with lamp")
+            #raise ConnectionError("Timeout communicating with lamp")
         except Exception as e:
             _LOGGER.error(f"Error communicating with lamp: {e}")
-            raise ConnectionError(f"Failed to communicate with lamp: {e}")
+            #raise ConnectionError(f"Failed to communicate with lamp: {e}")
         finally:
             if s:
                 # Шаг 6: Закрытие соединения (FIN -> FIN, ACK -> ACK)
