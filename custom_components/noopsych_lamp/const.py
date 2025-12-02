@@ -1,6 +1,6 @@
 """Constants for the Smart TCP Lamp integration."""
 
-DOMAIN = "noopsych"
+DOMAIN = "noopsych_lamp"
 
 # Конфигурация
 CONF_HOST = "host"
