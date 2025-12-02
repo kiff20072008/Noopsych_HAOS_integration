@@ -1,20 +1,19 @@
-"""The Smart TCP Lamp integration."""
+"""The Noopsych Lamp integration."""
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.const import CONF_HOST, Platform
 
 from .const import DOMAIN
-from .api import SmartLampTcpApi
+from .api import NoopsychLampApi
 
-# Добавляем Platform.NUMBER
 PLATFORMS = [Platform.SWITCH, Platform.NUMBER]
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Set up Smart TCP Lamp from a config entry."""
+    """Set up Noopsych Lamp from a config entry."""
     host = entry.data[CONF_HOST]
 
     # Создаем экземпляр API для общения с лампой
-    api = SmartLampTcpApi(hass, host)
+    api = NoopsychLampApi(hass, host)
     hass.data.setdefault(DOMAIN, {})[entry.entry_id] = api
 
     # Перенаправляем настройку на платформу switch

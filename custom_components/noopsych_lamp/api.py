@@ -1,4 +1,4 @@
-"""API for Smart TCP Lamp."""
+"""API for Noopsych Lamp."""
 import socket
 import logging
 import time
@@ -14,7 +14,7 @@ from .const import (
 _LOGGER = logging.getLogger(__name__)
 
 
-class SmartLampTcpApi:
+class NoopsychLampApi:
     """Class to control the lamp."""
 
     def __init__(self, hass: HomeAssistant, host: str):

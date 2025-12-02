@@ -1,12 +1,9 @@
-"""Constants for the Smart TCP Lamp integration."""
+"""Constants for the Noopsych Lamp integration."""
 
 DOMAIN = "noopsych_lamp"
 
-# Конфигурация
-CONF_HOST = "host"
 DEFAULT_PORT = 8266
 
-# Имена каналов для UI
 CHANNEL_NAMES = [
     "Channel 1",
     "Channel 2",
@@ -16,7 +13,6 @@ CHANNEL_NAMES = [
     "Channel 6",
 ]
 
-# Данные для команд
 PAYLOAD_INIT = "aaa51008bb"
 
 # Шаблон для ручного режима. {channels} будет заменен на 12 HEX-символов (6 каналов * 2 символа)

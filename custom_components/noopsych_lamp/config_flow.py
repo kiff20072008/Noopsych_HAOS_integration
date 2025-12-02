@@ -1,4 +1,4 @@
-"""Config flow for Smart TCP Lamp."""
+"""Config flow for Noopsych Lamp."""
 import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.const import CONF_HOST
@@ -6,8 +6,8 @@ from homeassistant.const import CONF_HOST
 from .const import DOMAIN
 
 
-class SmartLampTCPConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    """Handle a config flow for Smart TCP Lamp."""
+class NoopsychLampConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
+    """Handle a config flow for Noopsych Lamp."""
 
     VERSION = 1
 
