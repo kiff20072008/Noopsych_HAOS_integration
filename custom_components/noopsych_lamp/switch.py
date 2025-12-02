@@ -29,7 +29,7 @@ class NoopsychLampSwitch(SwitchEntity):
         self._attr_is_on = False  # Мы не можем узнать состояние, поэтому начинаем с "выключено"
         self._attr_name = "Lamp Manual Mode"
         self._attr_unique_id = f"{entry.unique_id}-manual-mode"
-        self.entity_id = generate_entity_id("switch.{}", self._attr_name, hass=api._hass)
+        self.entity_id = f"switch.{DOMAIN}_manual_mode"
 
     @property
     def device_info(self) -> DeviceInfo:

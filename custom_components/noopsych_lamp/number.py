@@ -23,9 +23,11 @@ async def async_setup_entry(
     api = hass.data[DOMAIN][entry.entry_id]
 
     # Инициализируем хранилище со значениями по умолчанию (например, 100)
-    CHANNEL_STORAGE[entry.entry_id] = [100] * 6
+    if entry.entry_id not in CHANNEL_STORAGE:
+        CHANNEL_STORAGE[entry.entry_id] = [100] * 6
 
-    switch_entity_id = f"switch.{DOMAIN}_lamp_manual_mode"
+    switch_entity_id = f"switch.{DOMAIN}_manual_mode"
+
     entities = [
         NoopsychLampChannelNumber(api, entry, channel_index, switch_entity_id)
         for channel_index in range(len(CHANNEL_NAMES))
@@ -90,6 +92,7 @@ class NoopsychLampChannelNumber(NumberEntity):
         switch_state = self.hass.states.get(self._switch_entity_id)
         if switch_state:
             self._attr_available = switch_state.state == "on"
+            self.async_write_ha_state()
 
         # Регистрируем "слушателя", который будет вызывать self._handle_switch_state_change
         # каждый раз, когда состояние переключателя меняется.
