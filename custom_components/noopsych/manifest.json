@@ -1,5 +1,5 @@
 {
-  "domain": "noopsych_lamp",
+  "domain": "noopsych",
   "name": "Noopsych lamp",
   "codeowners": ["@kiff20072008"],
   "config_flow": true,
