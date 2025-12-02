@@ -30,6 +30,7 @@ class NoopsychLampApi:
         """
         _LOGGER.debug(f"Starting full session with {self._host}:{self._port}")
         return
+
         s = None
         try:
             # Создаем сокет
