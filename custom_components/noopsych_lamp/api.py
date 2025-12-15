@@ -8,7 +8,8 @@ from .const import (
     CMD_TEMPLATE,
     PAYLOAD_SET_MANUAL_MODE,
     PAYLOAD_SET_AUTO_MODE,
-    PAYLOAD_APPLY_CHANNELS_TPL
+    PAYLOAD_APPLY_CHANNELS_TPL,
+    PAYLOAD_INIT
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -53,22 +54,22 @@ class NoopsychLampApi:
             s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
 
             # Шаг 1: Подключение (SYN -> SYN, ACK -> ACK)
-            #s.connect((self._host, self._port))
-            #_LOGGER.debug("Socket connected.")
+            s.connect((self._host, self._port))
+            _LOGGER.debug("Socket connected.")
 
             # Шаг 2: Отправка пакета инициализации
-            #init_bytes = bytes.fromhex(PAYLOAD_INIT)
-            #_LOGGER.debug(f"Sending INIT payload: {init_bytes.hex()}")
-            #s.sendall(init_bytes)
+            init_bytes = bytes.fromhex(PAYLOAD_INIT)
+            _LOGGER.debug(f"Sending INIT payload: {init_bytes.hex()}")
+            s.sendall(init_bytes)
 
             # Шаг 3: Получение ответа от сервера
             # Это заставит наш TCP стек отправить пустой ACK в ответ
-            #response = s.recv(1024)
-            #_LOGGER.debug(f"Received response after INIT: {response.hex()}")
+            response = s.recv(1024)
+            _LOGGER.debug(f"Received response after INIT: {response.hex()}")
 
             # Небольшая пауза, чтобы дать стеку TCP гарантированно отправить ACK
             # перед отправкой следующих данных. Иногда это помогает.
-            #time.sleep(0.05)
+            time.sleep(0.05)
 
             # Шаг 4: Отправка основной команды
             _LOGGER.debug(f"Sending COMMAND payload: {command_payload.hex()}")
