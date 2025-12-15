@@ -1,6 +1,8 @@
 """API for Noopsych Lamp."""
 import socket
 import logging
+import time
+
 from homeassistant.core import HomeAssistant
 
 from .const import (
