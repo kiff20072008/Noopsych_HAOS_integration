@@ -44,7 +44,7 @@ class NoopsychLampChannelNumber(NumberEntity):
         self._entry = entry
         self._channel_index = channel_index
         self._switch_entity_id = switch_entity_id # Сохраняем ID переключателя
-        self._attr_available = False
+        self._attr_available = True
 
         self._attr_name = CHANNEL_NAMES[channel_index]
         self._attr_unique_id = f"{entry.unique_id}_channel_{channel_index}"
@@ -91,8 +91,9 @@ class NoopsychLampChannelNumber(NumberEntity):
         # Получаем текущее состояние переключателя при запуске
         switch_state = self.hass.states.get(self._switch_entity_id)
         if switch_state:
-            self._attr_available = switch_state.state == "on"
+        #    self._attr_available = switch_state.state == "on"
             self.async_write_ha_state()
+        self._attr_available = True
 
         # Регистрируем "слушателя", который будет вызывать self._handle_switch_state_change
         # каждый раз, когда состояние переключателя меняется.
